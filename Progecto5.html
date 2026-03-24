@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  input { padding: 8px; width: 260px; margin-bottom: 4px; }
+  .error { color: red; margin: 0; font-size: 14px; }
+  .ok { color: green; margin: 0; }
+  .field { margin-bottom: 12px; }
+  /* Estilo para el botón de mostrar */
+  .show-btn { cursor: pointer; background: #eee; border: 1px solid #ccc; padding: 4px 8px; font-size: 12px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+  <nav class="project-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-link home-link">← Volver al Índice</a>
+        <div class="nav-steps">
+            <a href="Progecto4.html" class="nav-link btn-prev">Anterior</a>
+            <span class="project-indicator">Proyecto 05 / 05</span>
+            <a href="index.html" class="nav-link btn-next">Siguiente</a>
+        </div>
+    </div>
+</nav>
+
+<h1>Sign Up Form</h1>
+
+<form id="signupForm">
+  <div class="field">
+    <label>Name:</label><br>
+    <input id="name" type="text" placeholder="Your name">
+    <p id="nameError" class="error"></p>
+  </div>
+
+  <div class="field">
+    <label>Password:</label><br>
+    <input id="password" type="password" placeholder="Min 8 characters">
+    <button type="button" id="togglePass" class="show-btn">Mostrar</button>
+    <p id="passwordError" class="error"></p>
+  </div>
+
+  <p><button type="submit">Sign Up</button></p>
+</form>
+
+<p id="result"></p>
+
+<script>
+const form = document.getElementById("signupForm");
+const nameInput = document.getElementById("name");
+const passInput = document.getElementById("password");
+const nameError = document.getElementById("nameError");
+const passError = document.getElementById("passwordError");
+const toggleBtn = document.getElementById("togglePass");
+const result = document.getElementById("result");
+
+// --- FUNCIÓN NUEVA: MOSTRAR/OCULTAR ---
+toggleBtn.addEventListener("click", function() {
+  // Si el tipo es password, lo cambiamos a text para que se vea
+  if (passInput.type === "password") {
+    passInput.type = "text";
+    toggleBtn.innerText = "Ocultar";
+  } else {
+    // Si ya se ve, lo volvemos a ocultar
+    passInput.type = "password";
+    toggleBtn.innerText = "Mostrar";
+  }
+});
+
+// Funciones de validación simples
+function validateName() {
+  let value = nameInput.value.trim();
+  if (value.length < 2) {
+    nameError.innerHTML = "Name too short.";
+    return false;
+  }
+  nameError.innerHTML = "";
+  return true;
+}
+
+function validatePassword() {
+  if (passInput.value.length < 8) {
+    passError.innerHTML = "Min 8 characters.";
+    return false;
+  }
+  passError.innerHTML = "";
+  return true;
+}
+
+// Manejo del Submit
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  
+  let isNameOk = validateName();
+  let isPassOk = validatePassword();
+
+  if (isNameOk && isPassOk) {
+    result.innerHTML = "¡Registro exitoso!";
+    result.className = "ok";
+  } else {
+    result.innerHTML = "Corrige los errores.";
+    result.className = "error";
+  }
+});
+</script>
+
+</body>
+</html>

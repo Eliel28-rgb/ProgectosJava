@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* Tu CSS se queda igual, solo asegúrate de que estas clases existan */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.modal-overlay.show { display: block; }
+.modal-box {
+  background: white; width: 90%; max-width: 400px;
+  margin: 100px auto; padding: 20px; border-radius: 10px;
+  position: relative;
+}
+.modal-close { position: absolute; right: 12px; top: 8px; font-size: 24px; cursor: pointer; border: none; background: none; }
+</style>
+</head>
+<body>
+
+  <nav class="project-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-link home-link">← Volver al Índice</a>
+        <div class="nav-steps">
+            <a href="Progecto3.html" class="nav-link btn-prev">Anterior</a>
+            <span class="project-indicator">Proyecto 04 / 05</span>
+            <a href="Progecto5.html" class="nav-link btn-next">Siguiente</a>
+        </div>
+    </div>
+</nav>
+
+<h1>JavaScript Project</h1>
+<h2>Modal Dinámico</h2>
+
+<button id="btnPerfil">Ver Perfil</button>
+<button id="btnAjustes">Configuración</button>
+
+<div id="modal" class="modal-overlay">
+  <div class="modal-box">
+    <button id="closeBtn" class="modal-close">×</button>
+    <h3 id="modalTitle">Título Original</h3>
+    <p id="modalText">Este es el texto base.</p>
+  </div>
+</div>
+
+<script>
+const modal = document.getElementById("modal");
+const closeBtn = document.getElementById("closeBtn");
+const mTitle = document.getElementById("modalTitle");
+const mText = document.getElementById("modalText");
+
+// 3. La función ahora recibe "titulo" y "mensaje"
+function openModal(titulo, mensaje) {
+  mTitle.innerText = titulo;
+  mText.innerText = mensaje;
+  modal.classList.add("show");
+}
+
+function closeModal() {
+  modal.classList.remove("show");
+}
+
+// 4. Usamos funciones anónimas para pasar los datos sin que se ejecuten solas
+document.getElementById("btnPerfil").addEventListener("click", function() {
+  openModal("Mi Perfil", "Bienvenido a tu área personal.");
+});
+
+document.getElementById("btnAjustes").addEventListener("click", function() {
+  openModal("Configuración", "Aquí puedes cambiar tu contraseña.");
+});
+
+closeBtn.addEventListener("click", closeModal);
+
+/* Cerrar al hacer clic fuera o Escape (Igual que tu código anterior) */
+modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+</script>
+</body>
+</html>

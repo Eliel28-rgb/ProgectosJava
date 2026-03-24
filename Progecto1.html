@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <nav class="project-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-link home-link">← Volver al Índice</a>
+        <div class="nav-steps">
+            <a href="Progecto1.html" class="nav-link btn-prev">Anterior</a>
+            <span class="project-indicator">Proyecto 01 / 05</span>
+            <a href="Progecto2.html" class="nav-link btn-next">Siguiente</a>
+        </div>
+    </div>
+</nav>
+<h1>JavaScript Project</h1>
+<h2>Counter</h2>
+
+<p id="count" style="font-size:40px;">0</p>
+
+<button onclick="increaseCount()">+</button>
+<button onclick="decreaseCount()">-</button>
+<button onclick="resetCount()">Reset</button>
+<button onclick="saveCount()">Save</button>
+<button onclick="loadCount()">Load</button>
+
+<input type ="number" id="step">
+
+<script>
+// Declare the counter
+let count = 0;
+
+// Function to display the counter
+function updateCount() {
+  document.getElementById("count").innerHTML = count;
+}
+
+// Function to increase the counter
+function increaseCount() {
+  let NumberToIncrease = Number(document.getElementById("step").value)
+  
+  count = count + NumberToIncrease;
+  updateCount();
+}
+
+// Function to decrease the counter
+function decreaseCount() {
+  let NumberToDecrease = document.getElementById("step").value
+  
+  count = count - NumberToDecrease;
+  updateCount();
+}
+
+// Function to reset the counter
+function resetCount() {
+  count = 0;
+  updateCount();
+}
+
+// Function to save the counter
+function saveCount() {
+  localStorage.setItem("count", count);
+}
+
+// Function to load the counter
+function loadCount() {
+  let saved = localStorage.getItem("count");
+  if (saved !== null) {
+    count = Number(saved);
+  }
+  updateCount();
+}
+</script>
+
+</body>
+</html>
